@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.alessandro.testbottom.Vista_Problema"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <io.github.kexanie.library.MathView
+        android:id="@+id/formula_one"
+        android:layout_width="0dp"
+        android:layout_height="444dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        auto:engine="MathJax"
+        auto:text="When \\(a \\ne 0\\), there are two solutions to \\(ax^2 + bx + c = 0\\)
+        and they are $$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$">
+
+    </io.github.kexanie.library.MathView>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formula_one">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_favoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="65dp"
+            android:clickable="true"
+            app:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_favorite_border_white_24dp"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_enviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_edit_white_24dp"
+            tools:layout_editor_absoluteX="172dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_ayuda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="65dp"
+            android:clickable="true"
+            app:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_question_answer_white_24dp"
+            tools:layout_editor_absoluteX="244dp"
+            tools:layout_editor_absoluteY="391dp" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
