@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="municipios_array">
+        <item>Tijuana</item>
+        <item>Mexicali</item>
+        <item>Rosarito</item>
+        <item>Tecate</item>
+        <item>Ensenada</item>
+
+    </string-array>
+</resources>
