@@ -3,10 +3,11 @@
     package="com.example.alessandro.testbottom">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,13 +19,17 @@
         <activity
             android:name=".MainActivity"
             android:label="OMMBC">
+
+        </activity>
+        <activity android:name=".Vista_Problema" />
+        <activity android:name=".ActivityLogin"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vista_Problema"></activity>
     </application>
 
 </manifest>
