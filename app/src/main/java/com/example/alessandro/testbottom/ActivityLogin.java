@@ -50,6 +50,10 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }
 
+
+
+    // Clase de conexión a la api
+
     private class Login extends AsyncTask<Void,Void,Void> {
 
         private String usr;
@@ -68,7 +72,8 @@ public class ActivityLogin extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             pd = new ProgressDialog(c);
-            pd.setMessage("Logging In...");
+            pd.setMessage("Entrando...");
+            pd.setCancelable(false);
             pd.show();
             super.onPreExecute();
         }

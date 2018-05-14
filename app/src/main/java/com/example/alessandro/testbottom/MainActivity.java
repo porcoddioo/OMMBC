@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentEntregados = new FragmentEntregados();
         fragmentFavoritos = new FragmentFavoritos();
         setFragment(fragmentList);
+
         Allertami(Token);
 
         bottom_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
