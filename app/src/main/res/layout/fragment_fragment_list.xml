@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".FragmentList">
 
-    <!-- TODO: Update blank fragment layout -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:text="Problemas"/>
 
-    <ListView
-        android:id="@+id/lista_prob"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </FrameLayout>
