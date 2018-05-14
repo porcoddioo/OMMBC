@@ -2,11 +2,8 @@ package com.example.alessandro.testbottom;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,8 +46,6 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
     }
-
-
 
     // Clase de conexión a la api
 
@@ -133,6 +128,7 @@ public class ActivityLogin extends AppCompatActivity {
             try {
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             } catch (IOException e) {
+
                 e.printStackTrace();
             }
             StringBuilder sb = new StringBuilder();

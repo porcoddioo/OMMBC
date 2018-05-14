@@ -30,7 +30,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityRegistro" />
-        <activity android:name=".ActivityLauncher"></activity>
+        <activity
+            android:name=".ActivityLauncher"
+            android:theme="@android:style/Theme.NoDisplay"></activity>
     </application>
 
 </manifest>
