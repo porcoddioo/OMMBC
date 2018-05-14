@@ -2,11 +2,8 @@ package com.example.alessandro.testbottom;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +47,8 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }
 
+    // Clase de conexión a la api
+
     private class Login extends AsyncTask<Void,Void,Void> {
 
         private String usr;
@@ -68,7 +67,8 @@ public class ActivityLogin extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             pd = new ProgressDialog(c);
-            pd.setMessage("Logging In...");
+            pd.setMessage("Entrando...");
+            pd.setCancelable(false);
             pd.show();
             super.onPreExecute();
         }
@@ -128,6 +128,7 @@ public class ActivityLogin extends AppCompatActivity {
             try {
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             } catch (IOException e) {
+
                 e.printStackTrace();
             }
             StringBuilder sb = new StringBuilder();
