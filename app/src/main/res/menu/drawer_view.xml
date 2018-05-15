@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Nombre"
+            android:icon="@drawable/ic_profile"
+            android:title="Nombre" />
+        <item
+            android:id="@+id/Apellido"
+            android:icon="@drawable/ic_profile"
+            android:title="Apellido" />
+        <item
+            android:id="@+id/Telefono"
+            android:icon="@drawable/ic_profile"
+            android:title="Telefono" />
+        <item
+            android:id="@+id/Correo"
+            android:icon="@drawable/ic_profile"
+            android:title="Correo" />
+        <item
+            android:id="@+id/Institucion"
+            android:icon="@drawable/ic_profile"
+            android:title="Institucion" />
+        <item
+            android:id="@+id/Ciudad"
+            android:icon="@drawable/ic_profile"
+            android:title="Ciudad" />
+        <item
+            android:id="@+id/Estado"
+            android:icon="@drawable/ic_profile"
+            android:title="Estado" />
+        <item
+            android:id="@+id/Ranking"
+            android:icon="@drawable/ic_profile"
+            android:title="Ranking" />
+        <item
+            android:id="@+id/Fecha_de_Nacimiento"
+            android:icon="@drawable/ic_profile"
+            android:title="Fecha de Nacimiento" />
+    </group>
+</menu>
