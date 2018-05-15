@@ -3,6 +3,7 @@ package com.example.alessandro.testbottom;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,7 +39,6 @@ public class FragmentList extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fragment_list, container, false);
-
         recyclerview = (RecyclerView) v.findViewById(R.id.recycler_view);
         qAdapter = new ProblemAdapter(problemList);
         RecyclerView.LayoutManager qLayoutManager = new LinearLayoutManager(getActivity());
@@ -61,58 +61,9 @@ public class FragmentList extends Fragment {
         return v;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-        try{
-            problemList.clear();
-            prepareProbData();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /*
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        lista_problemas = (ListView) getView().findViewById(R.id.lista_prob);
-        ArrayList<String> problemas = new ArrayList<String>();
-        // Llena el ArrayList de prueba
-        for(int i = 0 ; i < 50 ; i++) problemas.add("Problema "+(i+1));
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext() ,android.R.layout.simple_list_item_1, problemas);
-        lista_problemas.setAdapter(adapter);
-        lista_problemas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), Vista_Problema.class);
-                intent.putExtra("numero",position);
-                startActivity(intent);
-            }
-        });
-    }*/
-
-    private Problema genProb(String name){
-       Problema qNew = new Problema(name, "Descripcion Test");
-        return qNew;
-    }
-
-    private void prepareProbData() throws Exception{
-
-        try{
-            problemList.add(genProb("Problema 1"));
-            problemList.add(genProb("Problema 2"));
-            problemList.add(genProb("Problema 3"));
-            problemList.add(genProb("Problema 4"));
-            problemList.add(genProb("Problema 5"));
-            problemList.add(genProb("Problema 6"));
-            problemList.add(genProb("Problema 7"));
-            problemList.add(genProb("Problema 8"));
-            problemList.add(genProb("Problema 9"));
-            problemList.add(genProb("Problema 10"));
-
-
-            qAdapter.notifyDataSetChanged();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    public void actualiza () {
+        problemList.clear();
+        problemList.addAll(((MainActivity)getActivity()).getProblemas());
+        qAdapter.notifyDataSetChanged();
     }
 }

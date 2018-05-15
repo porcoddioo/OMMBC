@@ -16,6 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,7 +30,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentFavoritos fragmentFavoritos;
     private BottomNavigationView bottom_nav;
     private String Token;
+    private ArrayList<Problema> problemas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentFavoritos = new FragmentFavoritos();
         setFragment(fragmentList);
 
-        Allertami(Token);
+        new bajaProblemas(Token,this).execute();
 
         bottom_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -95,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -128,25 +134,27 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    /*class callAPI extends AsyncTask<Void, Void, Void>  {
+    public void sendDataToFragment(ArrayList<Problema> data) {
+
+    }
+
+    class bajaProblemas extends AsyncTask<Void, Void, Void>  {
 
         String response = "No response";
-        String usr;
-        String pwd;
+        String token;
         Context mycont;
         ProgressDialog dialog;
 
 
-        public callAPI(String usr, String pwd, Context mycont) {
-            this.usr = usr;
-            this.pwd = pwd;
+        public bajaProblemas (String token, Context mycont) {
+            this.token = token;
             this.mycont = mycont;
         }
 
         @Override
         protected void onPreExecute() {
             dialog = new ProgressDialog(mycont);
-            dialog.setMessage("Logging In");
+            dialog.setMessage("Bajando problemas...");
             dialog.show();
             super.onPreExecute();
         }
@@ -155,35 +163,11 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             URL url = null;
             HttpURLConnection conn = null;
-            byte[] postDataBytes = null;
             Reader in = null;
             try {
-                url = new URL("http://35.197.88.181/signin");
+                url = new URL("http://35.197.88.181/api/problems?qnty=10&page=1");
             } catch (MalformedURLException e) {
-                Allertami(e.getMessage());
-            }
-            Map<String, Object> params = new LinkedHashMap<>();
-            params.put("email", usr);
-            params.put("password", pwd);
-            StringBuilder postData = new StringBuilder();
-            for (Map.Entry<String, Object> param : params.entrySet()) {
-                if (postData.length() != 0) postData.append('&');
-                try {
-                    postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    Allertami(e.getMessage());
-                }
-                postData.append('=');
-                try {
-                    postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    Allertami(e.getMessage());
-                }
-            }
-            try {
-                postDataBytes = postData.toString().getBytes("UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                Allertami(e.getMessage());
+                e.printStackTrace();
             }
             try {
                 conn = (HttpURLConnection) url.openConnection();
@@ -191,18 +175,12 @@ public class MainActivity extends AppCompatActivity {
                 Allertami(e.getMessage());
             }
             try {
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod("GET");
             } catch (ProtocolException e) {
                 Allertami(e.getMessage());
             }
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-            conn.setDoOutput(true);
-            try {
-                conn.getOutputStream().write(postDataBytes);
-            } catch (IOException e) {
-                Allertami(e.getMessage());
-            }
+            conn.setRequestProperty("Authorization",token);
             try {
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             } catch (IOException e) {
@@ -219,10 +197,26 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-
+            JSONArray jArray = null;
+            problemas = new ArrayList<Problema>();
+            try {
+                jArray = new JSONArray(response);
+            } catch (Exception e) {}
+            for (int i=0; i < jArray.length(); i++)
+            {
+                try {
+                    JSONObject oneObject = jArray.getJSONObject(i);
+                    problemas.add(new Problema(oneObject.getString("tema"),oneObject.getString("pregunta")));
+                } catch (JSONException e) {
+                    // Oops
+                }
+            }
+            fragmentList.actualiza();
             dialog.dismiss();
         }
-    }*/
+    }
 
-
+    public ArrayList<Problema> getProblemas() {
+        return problemas;
+    }
 }
