@@ -99,8 +99,16 @@ public class FragmentList extends Fragment {
 
         try{
             problemList.add(genProb("Problema 1"));
-            //problemList.add(genProb("Problema 2"));
-            //problemList.add(genProb("Problema 3"));
+            problemList.add(genProb("Problema 2"));
+            problemList.add(genProb("Problema 3"));
+            problemList.add(genProb("Problema 4"));
+            problemList.add(genProb("Problema 5"));
+            problemList.add(genProb("Problema 6"));
+            problemList.add(genProb("Problema 7"));
+            problemList.add(genProb("Problema 8"));
+            problemList.add(genProb("Problema 9"));
+            problemList.add(genProb("Problema 10"));
+
 
             qAdapter.notifyDataSetChanged();
         }catch (Exception e){
