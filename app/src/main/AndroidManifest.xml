@@ -23,16 +23,23 @@
         <activity
             android:name=".ActivityLogin"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".ActivityRegistro" />
         <activity
             android:name=".ActivityLauncher"
-            android:theme="@android:style/Theme.NoDisplay"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+        </activity>
+
+
     </application>
 
 </manifest>
