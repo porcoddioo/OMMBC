@@ -31,6 +31,7 @@ public class ActivityLogin extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private Button submit;
+    Button btnLogin, btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,19 @@ public class ActivityLogin extends AppCompatActivity {
                 new Login(email.getText().toString(),password.getText().toString(),ActivityLogin.this).execute();
             }
         });
+
+        btnRegister = (Button) findViewById(R.id.menu_button_register);
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent MyIntent = new Intent(ActivityLogin.this, ActivityRegistro.class);
+                startActivity(MyIntent);
+            }
+        });
     }
+
+
 
     // Clase de conexión a la api
 
