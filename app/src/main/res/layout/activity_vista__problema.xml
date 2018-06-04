@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        auto:engine="MathJax"
+        auto:engine="KaTeX"
         auto:text="When \\(a \\ne 0\\), there are two solutions to \\(ax^2 + bx + c = 0\\)
         and they are $$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$">
 

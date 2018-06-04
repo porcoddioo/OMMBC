@@ -62,7 +62,6 @@ public class FragmentList extends Fragment {
     }
 
     public void actualiza () {
-        problemList.clear();
         problemList.addAll(((MainActivity)getActivity()).getProblemas());
         qAdapter.notifyDataSetChanged();
     }

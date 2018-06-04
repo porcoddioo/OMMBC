@@ -36,7 +36,6 @@ import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
 public class Vista_Problema extends AppCompatActivity {
 
-    private Intent intent;
     private Problema nproblema;
     private int favorito = 0;
     private FloatingActionButton fab_favoritos;
@@ -49,6 +48,7 @@ public class Vista_Problema extends AppCompatActivity {
     private InputStream inputStreamImg = null;
     private File destination = null;
     private MathView desc;
+    private LaTex texto_problema;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +62,12 @@ public class Vista_Problema extends AppCompatActivity {
         getSupportActionBar().setTitle(nproblema.Tema);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        desc.setText(nproblema.Pregunta);
-
+        //desc.setText(nproblema.Pregunta);
+        ////////////////////////////////////
+        //Estas lineas fueron Merge:
+        texto_problema = new LaTex(nproblema.getDesc());
+        desc.setText(texto_problema.get());
+        ///////////////////////////////////////
         fab_ayuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
