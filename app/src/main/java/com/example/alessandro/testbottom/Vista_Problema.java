@@ -62,10 +62,9 @@ public class Vista_Problema extends AppCompatActivity {
         getSupportActionBar().setTitle(nproblema.Tema);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //desc.setText(nproblema.Pregunta);
         ////////////////////////////////////
         //Estas lineas fueron Merge:
-        texto_problema = new LaTex(nproblema.getDesc());
+        texto_problema = new LaTex(nproblema.Pregunta);
         desc.setText(texto_problema.get());
         ///////////////////////////////////////
         fab_ayuda.setOnClickListener(new View.OnClickListener() {
