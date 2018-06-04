@@ -111,33 +111,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void Allertami(String msg) {
-        AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(this);
-        }
-        builder.setTitle("Token de sesión")
-                .setMessage(msg)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
-
-    public void sendDataToFragment(ArrayList<Problema> data) {
-
-    }
-
     class bajaProblemas extends AsyncTask<Void, Void, Void>  {
 
         String response = "No response";
@@ -165,33 +138,33 @@ public class MainActivity extends AppCompatActivity {
             HttpURLConnection conn = null;
             Reader in = null;
             try {
-                url = new URL("http://35.197.88.181/api/problems?qnty=10&page=1");
+                url = new URL("http://35.197.88.181/api/problems?qnty=100&page=1");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
             try {
                 conn = (HttpURLConnection) url.openConnection();
             } catch (IOException e) {
-                Allertami(e.getMessage());
+                e.printStackTrace();
             }
             try {
                 conn.setRequestMethod("GET");
             } catch (ProtocolException e) {
-                Allertami(e.getMessage());
+                e.printStackTrace();
             }
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Authorization",token);
             try {
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             } catch (IOException e) {
-                Allertami(e.getMessage());
+                e.printStackTrace();
             }
             StringBuilder sb = new StringBuilder();
             try {
                 for (int c; (c = in.read()) >= 0; )
                     sb.append((char) c);
                  response = sb.toString();
-            } catch (IOException e) {Allertami(e.getMessage());}
+            } catch (IOException e) {e.printStackTrace();}
             return null;
         }
 

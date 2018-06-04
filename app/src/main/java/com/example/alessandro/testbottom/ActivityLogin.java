@@ -40,6 +40,8 @@ public class ActivityLogin extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.pass);
         submit = (Button)findViewById(R.id.submit);
+        email.setText("test@test.com");
+        password.setText("test");
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
