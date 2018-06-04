@@ -15,12 +15,13 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         //cambiar por valores de problemas:
-        public TextView Name, Description;
+        public TextView Area,Tema,Pregunta;
 
         public MyViewHolder(View view) {
             super(view);
-            Name = (TextView) view.findViewById(R.id.Name);
-            Description = (TextView) view.findViewById(R.id.Description);
+            Area = (TextView) view.findViewById(R.id.Area);
+            Tema = (TextView) view.findViewById(R.id.Tema);
+            Pregunta = (TextView) view.findViewById(R.id.Pregunta);
         }
     }
     public ProblemAdapter(List<Problema> problemList){
@@ -38,9 +39,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.MyViewHo
         Problema q = problemList.get(position);
 
         //Cambiar por getters de clase Problema para llenar los textviews:
-
-        holder.Name.setText(q.getName());
-        holder.Description.setText(q.getDesc());
+        holder.Area.setText(q.Area);
+        holder.Tema.setText(q.Tema);
+        holder.Pregunta.setText(q.Pregunta);
 
     }
     @Override

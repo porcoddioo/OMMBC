@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_content, fragment);
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -206,7 +204,22 @@ public class MainActivity extends AppCompatActivity {
             {
                 try {
                     JSONObject oneObject = jArray.getJSONObject(i);
-                    problemas.add(new Problema(oneObject.getString("tema"),oneObject.getString("pregunta")));
+                    //problemas.add(new Problema(oneObject.getString("tema"),oneObject.getString("pregunta")));
+                    problemas.add(new Problema(oneObject.getString("area"), oneObject.getString("tema"),
+                            oneObject.getString("pregunta"),oneObject.getString("nivel")));
+                    /*problemas.add(new Problema(oneObject.getString("area"),
+                            oneObject.getString("tema"),
+                            oneObject.getString("nivel"),
+                            oneObject.getString("pregunta"),
+                            oneObject.getString("imagen"),
+                            oneObject.getString("solucion"),
+                            oneObject.getString("tip"),
+                            oneObject.getString("origen"),
+                            oneObject.getString("siguiente"),
+                            oneObject.getString("anterior"),
+                            oneObject.getString("comentario"),
+                            oneObject.getString("puntaje")));
+                            */
                 } catch (JSONException e) {
                     // Oops
                 }

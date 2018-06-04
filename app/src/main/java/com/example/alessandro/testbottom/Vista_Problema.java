@@ -59,10 +59,10 @@ public class Vista_Problema extends AppCompatActivity {
         fab_favoritos = (FloatingActionButton)findViewById(R.id.fab_favoritos);
         desc = (MathView) findViewById(R.id.formula_one);
         nproblema = (Problema) getIntent().getSerializableExtra("Problema");
-        getSupportActionBar().setTitle(nproblema.getName());
+        getSupportActionBar().setTitle(nproblema.Tema);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        desc.setText(nproblema.getDesc());
+        desc.setText(nproblema.Pregunta);
 
         fab_ayuda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +70,8 @@ public class Vista_Problema extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto","correo@ejemplo.mx", null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ayuda problema "+nproblema.getName());
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Necesito ayuda con el problema "+nproblema.getName());
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ayuda problema "+nproblema.Tema);
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Necesito ayuda con el problema "+nproblema.Area);
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });
