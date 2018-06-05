@@ -1,17 +1,18 @@
 package com.example.alessandro.testbottom;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -24,18 +25,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentList fragmentList;
     private FragmentEntregados fragmentEntregados;
     private FragmentFavoritos fragmentFavoritos;
+    private FragmentAccount fragmentAccount;
     private BottomNavigationView bottom_nav;
     private String Token;
     private ArrayList<Problema> problemas;
@@ -58,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentList = new FragmentList();
         fragmentEntregados = new FragmentEntregados();
         fragmentFavoritos = new FragmentFavoritos();
+        fragmentAccount = new FragmentAccount();
         setFragment(fragmentList);
-
+        new BottomNavigationViewHelper().disableShiftMode(bottom_nav);
         new bajaProblemas(Token,this).execute();
 
         bottom_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_favoritos:
                         setFragment(fragmentFavoritos);
+                        return true;
+                    case R.id.navigation_account:
+                        setFragment(fragmentAccount);
                         return true;
 
                     default:
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject oneObject = jArray.getJSONObject(i);
                     //problemas.add(new Problema(oneObject.getString("tema"),oneObject.getString("pregunta")));
-                    problemas.add(new Problema(oneObject.getString("area"), oneObject.getString("tema"),
+                    problemas.add(new Problema(oneObject.getString("_id"),oneObject.getString("area"), oneObject.getString("tema"),
                             oneObject.getString("pregunta"),oneObject.getString("nivel")));
                     /*problemas.add(new Problema(oneObject.getString("area"),
                             oneObject.getString("tema"),
@@ -205,4 +205,31 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Problema> getProblemas() {
         return problemas;
     }
+
+    public class BottomNavigationViewHelper {
+        @SuppressLint("RestrictedApi")
+        public  void disableShiftMode(BottomNavigationView view) {
+            BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+            try {
+                Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+                shiftingMode.setAccessible(true);
+                shiftingMode.setBoolean(menuView, false);
+                shiftingMode.setAccessible(false);
+                for (int i = 0; i < menuView.getChildCount(); i++) {
+                    BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
+                    //noinspection RestrictedApi
+                    item.setShiftingMode(false);
+                    // set once again checked value, so view will be updated
+                    //noinspection RestrictedApi
+                    item.setChecked(item.getItemData().isChecked());
+                }
+            } catch (NoSuchFieldException e) {
+                Log.e("BNVHelper", "Unable to get shift mode field", e);
+            } catch (IllegalAccessException e) {
+                Log.e("BNVHelper", "Unable to change value of shift mode", e);
+            }
+        }
+    }
+
 }
+

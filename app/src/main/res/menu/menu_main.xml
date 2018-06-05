@@ -7,7 +7,4 @@
         android:title="User"
         android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_settings"
-        android:title="Perfil" />
 </menu>

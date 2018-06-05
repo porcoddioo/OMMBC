@@ -25,13 +25,11 @@ public class LaTex {
             if((converted.charAt(i)=='$')) {
                 if(flag==0) {
                     if(converted.charAt(i+1)!='$') {
-                        // sostituisci con \(
                         converted = new String(converted.substring(0, i) + "\\(" + converted.substring(i + 1, converted.length()));
                         flag = 1;
                     } else i=i+1;
                 }
                 else if (flag==1) {
-                    //sostituisci con \)
                     converted = new String(converted.substring(0,i) + "\\)"+ converted.substring(i+1,converted.length()));
                     flag = 0;
                 }

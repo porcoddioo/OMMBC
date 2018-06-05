@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_problemas"
@@ -9,6 +10,7 @@
     <item
         android:id="@+id/navigation_entregados"
         android:icon="@drawable/ic_paper_plane"
+        app:showAsAction="ifRoom"
         android:title="Entregados" />
 
 
@@ -16,6 +18,11 @@
         android:id="@+id/navigation_favoritos"
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title="Favoritos" />
+
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="Account" />
 
 
 
