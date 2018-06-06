@@ -7,30 +7,12 @@
     android:background="#ffffff"
     tools:context="com.example.alessandro.testbottom.ActivityLauncher">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="173dp"
-        android:text="Iniciando Sesión..."
-        android:textColor="#000000"
-        android:textSize="40sp"
-        android:fontFamily="Arial"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="72dp"
         android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -3,6 +3,7 @@ package com.example.alessandro.testbottom;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class ActivityLogin extends AppCompatActivity {
     private EditText password;
     private Button submit;
     Button btnLogin, btnRegister;
+    private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class ActivityLogin extends AppCompatActivity {
         submit = (Button)findViewById(R.id.submit);
         email.setText("alumno@test.com");
         password.setText("test");
+        mPrefs = getSharedPreferences("label", 0);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,7 +178,9 @@ public class ActivityLogin extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Intent i = new Intent(c,MainActivity.class);
-                i.putExtra("Token", token);
+                SharedPreferences.Editor mEditor = mPrefs.edit();
+                mEditor.putString("token", token).commit();
+                //i.putExtra("Token", token);
                 startActivity(i);
                 finish();
             }

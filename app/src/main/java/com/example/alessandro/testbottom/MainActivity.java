@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentFavoritos fragmentFavoritos;
     private FragmentAccount fragmentAccount;
     private BottomNavigationView bottom_nav;
+    private SharedPreferences mPrefs;
     private String Token;
     private ArrayList<Problema> problemas;
 
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("OMMBC");
-        Token = getIntent().getStringExtra("Token");
+        mPrefs = getSharedPreferences("label", 0);
+        Token = mPrefs.getString("token",null);
         bottom_nav = (BottomNavigationView) findViewById(R.id.navigation);
         main_content = (FrameLayout) findViewById(R.id.main_content);
         fragmentList = new FragmentList();
