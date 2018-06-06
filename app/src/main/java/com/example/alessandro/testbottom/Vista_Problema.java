@@ -3,6 +3,7 @@ package com.example.alessandro.testbottom;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -20,13 +21,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -49,6 +55,9 @@ public class Vista_Problema extends AppCompatActivity {
     private File destination = null;
     private MathView desc;
     private LaTex texto_problema;
+    private ArrayList<Problema> favoritos;
+    private SharedPreferences mPrefs;
+    private String mString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,8 @@ public class Vista_Problema extends AppCompatActivity {
         fab_enviar = (FloatingActionButton)findViewById(R.id.fab_enviar);
         fab_favoritos = (FloatingActionButton)findViewById(R.id.fab_favoritos);
         desc = (MathView) findViewById(R.id.formula_one);
+        mPrefs = getSharedPreferences("label", 0);
+        mString = mPrefs.getString("favoritos", null);
         nproblema = (Problema) getIntent().getSerializableExtra("Problema");
         getSupportActionBar().setTitle(nproblema.Tema);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,6 +77,7 @@ public class Vista_Problema extends AppCompatActivity {
         //Estas lineas fueron Merge:
         texto_problema = new LaTex(nproblema.Pregunta);
         desc.setText(texto_problema.get());
+        getFavoritos();
         ///////////////////////////////////////
         fab_ayuda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +98,7 @@ public class Vista_Problema extends AppCompatActivity {
         fab_favoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setFavorito();
                 if(favorito==0) {
                     fab_favoritos.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
                     favorito = 1;
@@ -212,4 +225,37 @@ public class Vista_Problema extends AppCompatActivity {
         cursor.close();
         return res;
     }
+
+    public void setFavorito () {
+        if(mString!=null) {
+            favoritos.add(nproblema);
+            String favJSONString = new Gson().toJson(favoritos);
+            SharedPreferences.Editor mEditor = mPrefs.edit();
+            mEditor.putString("favoritos", favJSONString).commit();
+            ShowToast("Lo aggiungo");
+        }
+        else {
+            favoritos = new ArrayList<Problema>();
+            favoritos.add(nproblema);
+            String favJSONString = new Gson().toJson(favoritos);
+            SharedPreferences.Editor mEditor = mPrefs.edit();
+            mEditor.putString("favoritos", favJSONString).commit();
+        }
+    }
+
+    public void removeFavorito () {
+
+    }
+
+    public void getFavoritos() {
+        Type type = new TypeToken< ArrayList < Problema >>() {}.getType();
+        if(mString!=null) {
+            favoritos = new Gson().fromJson(mString,type);
+        } else {ShowToast("Non c'è niente memorizzato");}
+    }
+
+    public int esFavorito() {
+        return 0;
+    }
+
 }
