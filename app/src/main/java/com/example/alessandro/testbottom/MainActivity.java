@@ -3,6 +3,7 @@ package com.example.alessandro.testbottom;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -58,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
         setFragment(fragmentList);
         new BottomNavigationViewHelper().disableShiftMode(bottom_nav);
         new bajaProblemas(Token,this).execute();
+
+
+        SharedPreferences mPrefs = getSharedPreferences("label", 0);
+        SharedPreferences.Editor mEditor = mPrefs.edit();
+        mEditor.putString("tag", "Ciao").commit();
+
 
         bottom_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
