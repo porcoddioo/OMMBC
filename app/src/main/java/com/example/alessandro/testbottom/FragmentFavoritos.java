@@ -62,6 +62,11 @@ public class FragmentFavoritos extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        actualiza();
+        super.onResume();
+    }
 
     public void actualiza () {
         Log.i("actualizaa", "se actualiza");

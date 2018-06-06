@@ -70,6 +70,7 @@ public class Vista_Problema extends AppCompatActivity {
         mPrefs = getSharedPreferences("label", 0);
         mString = mPrefs.getString("favoritos", null);
         nproblema = (Problema) getIntent().getSerializableExtra("Problema");
+        favoritos = new ArrayList<Problema>();
         getSupportActionBar().setTitle(nproblema.Tema);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -95,17 +96,18 @@ public class Vista_Problema extends AppCompatActivity {
             public void onClick(View v) {
                 selectImage();            }
         });
+        if(esFavorito()) fab_favoritos.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
+        else fab_favoritos.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border_white_24dp));
         fab_favoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFavorito();
-                if(favorito==0) {
-                    fab_favoritos.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
-                    favorito = 1;
+                if(esFavorito()) {
+                    fab_favoritos.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border_white_24dp));
+                    removeFavorito();
                 }
                 else {
-                    fab_favoritos.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border_white_24dp));
-                    favorito = 0;
+                    fab_favoritos.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
+                    setFavorito();
                 }
             }
         });
@@ -227,35 +229,35 @@ public class Vista_Problema extends AppCompatActivity {
     }
 
     public void setFavorito () {
-        if(mString!=null) {
-            favoritos.add(nproblema);
-            String favJSONString = new Gson().toJson(favoritos);
-            SharedPreferences.Editor mEditor = mPrefs.edit();
-            mEditor.putString("favoritos", favJSONString).commit();
-            ShowToast("Lo aggiungo");
-        }
-        else {
-            favoritos = new ArrayList<Problema>();
             favoritos.add(nproblema);
             String favJSONString = new Gson().toJson(favoritos);
             SharedPreferences.Editor mEditor = mPrefs.edit();
             mEditor.putString("favoritos", favJSONString).commit();
         }
-    }
 
     public void removeFavorito () {
-
+        for(int i = 0 ; i < favoritos.size() ; i++){
+            if(nproblema.ID.compareTo(favoritos.get(i).ID)==0) {
+                favoritos.remove(i);
+                String favJSONString = new Gson().toJson(favoritos);
+                SharedPreferences.Editor mEditor = mPrefs.edit();
+                mEditor.putString("favoritos", favJSONString).commit();
+            }
+        }
     }
 
     public void getFavoritos() {
         Type type = new TypeToken< ArrayList < Problema >>() {}.getType();
         if(mString!=null) {
             favoritos = new Gson().fromJson(mString,type);
-        } else {ShowToast("Non c'è niente memorizzato");}
+        }
     }
 
-    public int esFavorito() {
-        return 0;
+    public boolean esFavorito() {
+        for(int i = 0 ; i < favoritos.size() ; i++){
+            if(nproblema.ID.compareTo(favoritos.get(i).ID)==0) return true;
+        }
+        return false;
     }
 
 }
