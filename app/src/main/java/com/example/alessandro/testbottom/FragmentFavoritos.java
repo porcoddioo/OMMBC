@@ -65,7 +65,6 @@ public class FragmentFavoritos extends Fragment {
     @Override
     public void onResume() {
         actualiza();
-        //aaa
         super.onResume();
     }
 
