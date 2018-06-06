@@ -7,42 +7,6 @@
     tools:context="com.example.alessandro.testbottom.ActivityLogin"
     tools:layout_editor_absoluteY="25dp">
 
-    <!--<Button-->
-    <!--android:id="@+id/test_tab"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="110dp"-->
-    <!--android:background="#003E5E"-->
-    <!--android:text="Test Tab"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="@+id/button2"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/button2" />-->
-
-    <!--<Button-->
-    <!--android:id="@+id/button"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="9dp"-->
-    <!--android:background="#003E5E"-->
-    <!--android:text="Login"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--app:layout_constraintBottom_toBottomOf="@+id/imageView"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--<Button-->
-    <!--android:id="@+id/button2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="12dp"-->
-    <!--android:background="#003E5E"-->
-    <!--android:text="Register"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--app:layout_constraintBottom_toTopOf="@+id/test_tab"-->
-    <!--app:layout_constraintStart_toStartOf="@+id/button"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
-
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -114,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="@null"
-            android:text="¿No eres miembro? ¡Registrate!"
+            android:text="¿No eres miembro? ¡Regístrate!"
             android:textAllCaps="false"
             android:textColor="#003E5E" />
 
